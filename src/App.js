@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState, useMemo} from 'react';
+import React, {useState, useMemo, useRef} from 'react';
 import ComponentA from './Components/ComponentA';
 import ComponentB from './Components/ComponentB';
 
@@ -16,6 +16,8 @@ function App() {
     const memoComponentA = useMemo(() => {
         return (<ComponentA count={countA}/>)
     }, [countA])
+
+    const inputRef = useRef();
     return (
         <div className="App">
             <p>App js Count A: {countA}</p>
@@ -26,6 +28,13 @@ function App() {
             {memoComponentA}
             <p></p>
             <ComponentB count={countB}/>
+            <br/>
+            <input ref={inputRef} type="text"/>
+            <input type="text"/>
+            <input type="text"/>
+            <button onClick={() => {
+                inputRef.current.focus()
+            }}>Focus</button>
         </div>
     );
 }
